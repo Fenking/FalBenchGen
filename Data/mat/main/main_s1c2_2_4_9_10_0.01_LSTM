@@ -1,0 +1,29 @@
+#!/bin/sh
+/home/ctr/MATLAB/R2021a/bin/matlab -nodesktop -nosplash <<EOF
+clear;
+addpath(genpath('/home/deyun/git/FalBench/breach'));
+addpath(genpath('/home/ctr/git2/FalBench'));
+s1c2 = STL_Formula('phi','alw_[0,24](b[t] < 20)');
+addpath(['STL_TO_SMT'],['STL_TO_SMT' filesep 'infix2prefix']);
+
+switchpt = 9;
+T = 24.0;
+input_num = 2;
+input_range = [0.0 1.0;0.0 1.0];
+output_range = [-50.0 50.0];
+controlpt = 4;
+num_var = 10;
+inputf = 's1c2_2_4_9_10_0.01_LSTM/input_traces';
+outputf = 's1c2_2_4_9_10_0.01_LSTM/output_traces';
+step_size = 1.0;
+delta_range = [0 5.0];
+h = 0.01;
+
+cd 'STL_TO_SMT/'
+set(0,'RecursionLimit',1300);
+gt = TraceGenerator(inputf, outputf, num_var, controlpt, T, switchpt, step_size, input_num, input_range, output_range, h, s1c2, delta_range);
+gt.gen();
+fal_tr = gt.fal_tr;
+save('/home/ctr/git2/FalBench/STL_TO_SMT/Faltr/s1c2_2_4_9_10_0.01_LSTM_faltr.mat', 'fal_tr');
+quit
+EOF

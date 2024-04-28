@@ -1,0 +1,14 @@
+#!/bin/sh
+/Applications/MATLAB_R2023a.app/bin/matlab -nodesktop -nosplash <<EOF
+clear;
+cd '/Users/yipeiyan/Desktop/FalBench/RNN/RNN_matlab';
+inputnum = 4;
+Outputnum = 1;
+
+untitled
+
+% system('chmod +x hello_world_script.sh');
+% system('./hello_world_script.sh');
+
+% trainNN_LSTM
+EOF

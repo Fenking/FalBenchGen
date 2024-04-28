@@ -1,0 +1,14 @@
+#!/bin/sh
+/home/ctr/MATLAB/R2021a/bin/matlab -nodesktop -nosplash <<EOF
+clear;
+addpath(genpath('/home/ctr/git/FalBench/breach'));
+cd '/home/ctr/git/FalBench/benchmark';
+home = '/home/ctr/git/FalBench';
+NetName = 's1e_m14_1_4_9_10_0.01_LSTM';
+inputnum = 1;
+outputnum = 1;
+spec = 'alw_[0,24](b[t] < 20)';
+Totaltime = 23.0;
+inputrange = [[0.0, 1.0]];
+breach_traces
+EOF

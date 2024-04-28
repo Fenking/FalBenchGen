@@ -1,0 +1,10 @@
+#!/bin/sh
+/home/ctr/MATLAB/R2021a/bin/matlab -nodesktop -nosplash <<EOF
+clear;
+s1d = STL_Formula('phi','alw_[0,24](b[t] < 20)');
+addpath(['STL_TO_SMT'],['STL_TO_SMT' filesep 'infix2prefix']);
+
+switchpt = 0;
+T = 0.0;
+input_num = 0;
+input_range = [

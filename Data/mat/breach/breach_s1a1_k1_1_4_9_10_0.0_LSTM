@@ -1,0 +1,17 @@
+#!/bin/sh
+/home/ctr/MATLAB/R2021a/bin/matlab -nodesktop -nosplash <<EOF
+clear;
+addpath(genpath('/Users/yipeiyan/Desktop/FalBench/breach'));
+cd '/Users/yipeiyan/Desktop/FalBenchGen/benchmark';
+home = '/Users/yipeiyan/Desktop/FalBenchGen';
+NetName = 's1a1_k1_1_4_9_10_0.0_LSTM';
+inputnum = 1;
+outputnum = 1;
+spec = 'alw_[0,24](b[t] < 20)';
+Totaltime = 23.0;
+inputrange = [[0.0, 1.0]];
+train_num = 3;
+phi_id = 's1a1';
+nn_id = 'k1';
+breach_traces
+EOF

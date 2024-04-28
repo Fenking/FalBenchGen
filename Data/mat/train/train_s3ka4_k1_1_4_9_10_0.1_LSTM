@@ -1,0 +1,18 @@
+#!/bin/sh
+/home/deyun/MATLAB/R2021a/bin/matlab -nodesktop -nosplash <<EOF
+clear;
+cd '/home/deyun/git/FalBench/RNN/RNN_matlab';
+home = '/home/deyun/git/FalBench';
+phi_id = 's3ka4';
+nn_id = 'k1';
+maxEpochs = 500;
+miniBatchSize = 128;
+optimizer = 'adam';
+numHiddenUnits = 200;
+NetName = 's3ka4_k1_1_4_9_10_0.1_LSTM';
+trainset = 's3ka4_1_4_9_10_0.1_LSTM';
+inputnum = 1;
+outputnum = 1;
+train_num = 3;
+trainNN_LSTM
+EOF
