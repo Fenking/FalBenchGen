@@ -1,4 +1,7 @@
 %% Add path
+
+% if you want to make falsification datas into '/Model/breachData'
+% please check the lines 79~80, 82~83 
 % clear;
 close all;
 clc;
@@ -73,10 +76,12 @@ for x = 1:train_num
     % R = BreachRequirement(phi);
 
     if train_num == 1
-        breach_test_data = fullfile(home, '/Model/breachDate/', ['Data_', NetName]);
+        % breach_test_data = fullfile(home, '/Model/breachData/', ['Data_', NetName]);
+        breach_test_data = fullfile(home, Model_matlab, ['Data_', NetName]);
     else
         NetName2 = strcat(phi_id,'_',nn_id,'_',num2str(x));
-        breach_test_data = fullfile(home, '/Model/breachDate/', ['Data_', NetName], NetName2);
+        % breach_test_data = fullfile(home, '/Model/breachData/', ['Data_', NetName], NetName2);
+        breach_test_data = fullfile(home, Model_matlab, ['Data_', NetName], NetName2);
     end
 
     % save(breach_test_data + ".txt",'num_sim','time','obj_best','-ascii');
