@@ -1,0 +1,236 @@
+%% Add path
+% clear;
+close all;
+clc;
+% replace this path with yours
+% home = '/Users/yipeiyan/Desktop/FalBench';
+% addpath(genpath('/Users/yipeiyan/Desktop/FalBench/breach'));
+% addpath(genpath('/Users/yipeiyan/Desktop/AI-CPS-Benchmark/tools/breach'));
+InitBreach;
+
+%% Add BreachSignalGen
+
+%测试+覆盖
+%{
+NetName = 'phi1_1_4_9_15_0.0001_LSTM';
+inputnum = 1;
+outputnum = 1;
+spec = 'alw_[0,24](b[t] < 80)';
+Totaltime = 23.0;
+inputrange = [[0.0, 10.0]];
+%}
+%{
+% MEX error not work with 2023a maci64
+% Work with 2023b maca64
+NetName = 'live_2_5_11_10_0.0001_LSTM';
+inputnum = 2;
+outputnum = 1;
+spec = 'ev_[5,30](b[t] < 20)';
+Totaltime = 29.0;
+inputrange = [[0.0, 10.0];[0.0, 10.0]];
+%}
+%{
+NetName = 's1_m3_1_4_9_10_0.0001_LSTM';
+inputnum = 2;
+outputnum = 2;
+spec = 'alw_[0,30](b1[t]<90 or ev_[0,5](b2[t]> 800))';
+Totaltime = 29.0;
+inputrange = [[0.0, 10.0];[0.0, 10.0]];
+%}
+
+name = fullfile(home, '/Model/Model_matlab/', [NetName,'.mat']);
+disp([newline 'breach test the ' NetName]);
+% name = '/Users/yipeiyan/Desktop/FalBench/Data/test/6/test_model.mat';
+net = load(name);
+sg = traces_signal_gen(inputnum,outputnum,net,Totaltime);
+B = BreachSignalGen(sg);
+B.SetTime(0:1:Totaltime);
+%
+for i = 1:size(inputrange,1)
+    T = inputrange(i,:);
+    Params = {};
+    Ranges = [];
+    for j = 1:round((Totaltime+1)/6)
+        paramName = strcat('u', num2str(i-1),'_',num2str(j-1));
+        Params{1,j} = paramName;
+        Ranges = [Ranges; T(1) T(2)];
+    end
+    B.SetParamRanges(Params, Ranges);% Can be inputed multiple.
+end
+%}
+%测试用于上部分
+%{
+T(1) = 0;
+T(2) = 10;
+B.SetParamRanges( {'u0_0', 'u0_1', 'u0_2', 'u0_3', 'u0_4', ...
+    'u1_0', 'u1_1', 'u1_2', 'u1_3', 'u1_4'}, ...
+    [T(1) T(2); T(1) T(2); T(1) T(2); T(1) T(2); T(1) T(2); ...
+    T(1) T(2); T(1) T(2); T(1) T(2); T(1) T(2); T(1) T(2)])
+%}
+
+% spec = 'alw_[0,24](b[t] < 80)';
+phi = STL_Formula('phi',spec);
+% R = BreachRequirement(phi);
+
+breach_test_data = fullfile(home, '/Model/breachDate/', ['Data_', NetName]);
+% save(breach_test_data + ".txt",'num_sim','time','obj_best','-ascii');
+fid = fopen([breach_test_data, '.txt'], 'w');
+
+
+%% Solve problem cmaes
+% Pb = FalsificationProblem(B,R);
+% Pb.max_obj_eval = 300;
+% Pb.setup_cmaes();
+% Pb.solve();
+
+trials = 30;% 10 20 30
+falsified = [];
+time = [];
+obj_best = [];
+num_sim = [];
+
+disp([newline 'breach start.']);
+current_time = datetime('now', 'Format', 'yyyy-MM-dd HH:mm:ss');
+disp(['Time Now: ' datestr(current_time)]);
+
+for n = 1:trials
+	falsif_pb = FalsificationProblem(B,phi);
+    % falsification budget
+	falsif_pb.max_time = 600;
+    falsif_pb.max_obj_eval = 1000;% 1000
+    % specific falsification algorithm
+	falsif_pb.setup_solver('cmaes');
+	falsif_pb.solve();
+	if falsif_pb.obj_best < 0
+		falsified = [falsified;1];
+	else
+		falsified = [falsified;0];
+	end
+	num_sim = [num_sim;falsif_pb.nb_obj_eval];
+	time = [time;falsif_pb.time_spent];
+	obj_best = [obj_best;falsif_pb.obj_best];
+end
+
+successful_runs = find(obj_best<0);
+SR = numel(successful_runs)/trials;
+avetime = sum(time(successful_runs))/numel(successful_runs);
+avesim = sum(num_sim(successful_runs))/numel(successful_runs);
+
+fprintf(fid, 'breach by cmaes:\n');
+fprintf(fid, 'SR = %.2f\n', SR);
+fprintf(fid, 'avetime = %.2f\n', avetime);
+fprintf(fid, '#sim = %.2f\n\n', avesim);
+
+fprintf(fid, 'num_sim = %d\n', num_sim);
+fprintf(fid, 'time = %.8f\n', time);
+fprintf(fid, 'obj_best = %.8f\n', obj_best);
+
+%% Solve problem simulannealbnd
+
+trials = 30;
+falsified = [];
+time = [];
+obj_best = [];
+num_sim = [];
+
+disp([newline 'breach start.']);
+current_time = datetime('now', 'Format', 'yyyy-MM-dd HH:mm:ss');
+disp(['Time Now: ' datestr(current_time)]);
+
+for n = 1:trials
+	falsif_pb = FalsificationProblem(B,phi);
+    % falsification budget
+	falsif_pb.max_time = 600;
+    falsif_pb.max_obj_eval = 1000;
+    % specific falsification algorithm
+	falsif_pb.setup_solver('simulannealbnd'); 
+	falsif_pb.solve();
+	if falsif_pb.obj_best < 0
+		falsified = [falsified;1];
+	else
+		falsified = [falsified;0];
+	end
+	num_sim = [num_sim;falsif_pb.nb_obj_eval];
+	time = [time;falsif_pb.time_spent];
+	obj_best = [obj_best;falsif_pb.obj_best];
+end
+
+successful_runs = find(obj_best<0);
+SR = numel(successful_runs)/trials;
+avetime = sum(time(successful_runs))/numel(successful_runs);
+avesim = sum(num_sim(successful_runs))/numel(successful_runs);
+
+fprintf(fid, '\n\nbreach by simulannealbnd:\n');
+fprintf(fid, 'SR = %.2f\n', SR);
+fprintf(fid, 'avetime = %.2f\n', avetime);
+fprintf(fid, '#sim = %.2f\n\n', avesim);
+
+fprintf(fid, 'num_sim = %d\n', num_sim);
+fprintf(fid, 'time = %.8f\n', time);
+fprintf(fid, 'obj_best = %.8f\n', obj_best);
+
+%% Solve problem random
+
+num = 1000;
+rob_list = [];
+
+trials = 30;
+falsified = [];
+time = [];
+obj_best = [];
+num_sim = [];
+
+for n = 1:trials
+    tic;
+    for k = 1:num
+        rob_list = [rob_list;k];
+        for i = 1:size(inputrange,1)
+            T = inputrange(i,:);
+            Params = {};
+            rands = [];
+            for j = 1:round((Totaltime+1)/6)
+                paramName = strcat('u', num2str(i-1),'_',num2str(j-1));
+                Params{1,j} = paramName;
+                rands = [rands, T(1)+(T(2)-T(1))*rand()];
+                % disp(rands)
+            end
+            B.SetParam(Params,rands);
+        end
+        B.Sim(0:1:Totaltime);
+        rob = B.CheckSpec(phi);
+        rob_list = [rob_list;rob];
+        if rob < 0
+            % break_list = [break_list, k];
+            break
+        end
+    end
+    end_time = toc;
+    num_sim = [num_sim;k];
+    time = [time;end_time];
+	obj_best = [obj_best;rob];
+end
+
+successful_runs = find(obj_best<0);
+SR = numel(successful_runs)/;
+avetime = sum(time(successful_runs))/numel(successful_runs);
+avesim = sum(num_sim(successful_runs))/numel(successful_runs);
+
+fprintf(fid, '\n\nbreach by random:\n');
+fprintf(fid, 'SR = %.2f\n', SR);
+fprintf(fid, 'avetime = %.2f\n', avetime);
+fprintf(fid, '#sim = %.2f\n\n', avesim);
+
+fprintf(fid, 'num_sim = %d\n', num_sim);
+fprintf(fid, 'time = %.8f\n', time);
+fprintf(fid, 'obj_best = %.8f\n', obj_best);
+fprintf(fid, '\n');
+fprintf(fid, 'rb = %.8f\n', rob_list);
+
+disp([newline 'breach end.']);
+current_time = datetime('now', 'Format', 'yyyy-MM-dd HH:mm:ss');
+disp(['Time Now: ' datestr(current_time)]);
+
+%% others
+
+% sendEmail();
+fclose(fid);
