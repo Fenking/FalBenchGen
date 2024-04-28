@@ -16,6 +16,8 @@ delta = 2;
 
 train_set = ['/Data/trainset_delta=' num2str(delta) '/'];
 Model_matlab = ['/Model/Model_matlab_delta=' num2str(delta) '/'];
+
+% FolderPath = fullfile(home, '/Data/trainset/', trainset);
 FolderPath = fullfile(home, train_set, trainset);
 inputFilePrefix = 'input_traces_';
 outputFilePrefix = 'output_traces_';
