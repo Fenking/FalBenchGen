@@ -64,4 +64,4 @@
 ### OTHERS
 
 - Decoding of ranking number RankNumber.
-    - image.
+    - ![image](https://github.com/Fenking/FalBenchGen/blob/main/Utils/RunkNumber.png)
