@@ -60,3 +60,8 @@
        - output range = [-50,50]
     5. $\phi_{2t}$ = s3t = `alw_[0,18](b[t] < 30 or ev_[0,6](b[t] < -10))`(not used in paper)
        - output range = [-50,50]
+  
+### OTHERS
+
+- Decoding of ranking number RankNumber.
+    - image.

@@ -3,8 +3,10 @@ import csv
 import pandas as pd
 
 # 设置文件夹路径
-Gpath = '/Users/yipeiyan/Desktop/aws_yipei/breachDate_delta=10'
-# Gpath = '/Users/yipeiyan/Desktop/FalBench/Model/breachDate'
+# Gpath = '/Users/yipeiyan/Desktop/aws_yipei/breachData_cc35c t4/breachData_cc35c t4_800'
+# Gpath = '/Users/yipeiyan/Desktop/FalBench/ARCHtest/breachData_200'
+# Gpath = '/Users/yipeiyan/Desktop/aws_yipei/breachData_cc35a/breachData_cc35a_800/'
+Gpath = '/Users/yipeiyan/Desktop/aws_yipei/breachDate_delta=10/breachDate_delta=10/'
 
 # 获取文件夹列表
 folders = [f.name for f in os.scandir(Gpath) if f.is_dir()]
@@ -62,10 +64,10 @@ for i in range(len(folders)):
 # 写入CSV文件
   
 
-with open('output/output.csv', 'w', newline='') as csvfile:
+with open(Gpath+'/output.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerows(all_data)
 
 # 读取CSV并保存为Excel
-df = pd.read_csv('output/output.csv', header=None)
+df = pd.read_csv(Gpath+'/output.csv', header=None)
 # df.to_excel('output/output.xlsx', index=False, header=False)
