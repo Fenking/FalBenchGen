@@ -70,51 +70,52 @@
 ##### RQ1: Results across all the benchmarks, and for each specification
 
 - Avg-SR
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_Avg_Boxplot_Budget_1000_Scattered.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_Avg_Boxplot_Budget_1000_Scattered.jpg)
 - Stdv-SR
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_Stdv_Boxplot_Budget_1000_Scattered.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_Stdv_Boxplot_Budget_1000_Scattered.jpg)
 
 ##### RQ1: Number of generated benchmarks per **RankNumber**
 
-- ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_Legend.pdf)
+- ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_Legend.jpg)
 - ALL
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_All_Budget_1000.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_All_Budget_1000.jpg)
 - $\phi_1$
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_S1_Budget_1000.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_S1_Budget_1000.jpg)
 - $\phi_2$
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_S3_Budget_1000.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_S3_Budget_1000.jpg)
 - $\phi_3$
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_S5_Budget_1000.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_S5_Budget_1000.jpg)
 - $\phi_4$
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_CC3_Budget_1000.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_CC3_Budget_1000.jpg)
 - $\phi_5$
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_CC5_Budget_1000.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_CC5_Budget_1000.jpg)
 
 ##### RQ2: Results for different values of violation ratio $vr \in \\{0, 0.01, 0.05, 0.1\\}$
 
 - Avg-SR
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ2/RQ2_Avg_Boxplot_Budget_1000_Scattered.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ2/RQ2_Avg_Boxplot_Budget_1000_Scattered.jpg)
 - Stdv-SR
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ2/RQ2_Stdv_Boxplot_Budget_1000_Scattered.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ2/RQ2_Stdv_Boxplot_Budget_1000_Scattered.jpg)
 
 ##### RQ4: Ranking positions of falsification approaches. 
 Each stacked bar reports, for a given falsification approach (on the x-axis), the percentage of benchmarks (y-axis) in which the approach is in 1st, 2nd, 3rd, or 4th position (starting from the bottom), using different colors. The numbers inside the stacked bar represent the concrete numbers of benchmarks. The number at the top of the stacked bar represents the total number of benchmarks for that specification.
 
 - 1000 simulations
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_1000.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_1000.jpg)
 - 800 simulations
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_800.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_800.jpg)
 - 600 simulations
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_600.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_600.jpg)
 - 400 simulations
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_400.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_400.jpg)
 - 200 simulations
-    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_200.pdf)
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_200.jpg)
 
 ##### RQ5: Distribution of ranking number **RankNumber** of the benchmarks of the ARCH competition
 
-- ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ5/RQ5_Legend.pdf)
-- ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ5/RQ5_Arch_Budget_1000.pdf)
+- ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ5/RQ5_Legend.jpg)
+- ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ5/RQ5_Arch_Budget_1000.jpg)
+
 
 ### Others
 
