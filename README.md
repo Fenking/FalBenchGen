@@ -1,4 +1,4 @@
-# FalBench
+# FalBenchGen
 
 ## Install
 
@@ -56,12 +56,68 @@
        - output range = [0,100]
     3. $\phi_3$ = s5 = `not (ev_[6,12](b[t] > 10)) or alw_[18,24](b[t] > -10)`
        - output range = [-50,50]
-    4. $\phi_{2k}$ = s3k = `alw_[0,18](b[t] > 30 or ev_[0,6](b[t] < -10))`(not used in paper)
+    4. $\phi_4$ = cc3 = `alw_[0,20](alw_[0,5](b1[t]<=20) or ev_[0,5](b2[t]>=40))`
+       - output range = [-100,100;-100,100]
+    5. $\phi_5$ = cc5 = `alw_[0,18](ev_[0,2](not(alw_[0,1](b1[t] >= 9)) or alw_[1,5](b2[t]>= 9)))`
+       - output range = [-100,100;-100,100]
+    6. $\phi_{2k}$ = s3k = `alw_[0,18](b[t] > 30 or ev_[0,6](b[t] < -10))`(not used in paper)
        - output range = [-50,50]
-    5. $\phi_{2t}$ = s3t = `alw_[0,18](b[t] < 30 or ev_[0,6](b[t] < -10))`(not used in paper)
+    7. $\phi_{2t}$ = s3t = `alw_[0,18](b[t] < 30 or ev_[0,6](b[t] < -10))`(not used in paper)
        - output range = [-50,50]
-  
-### OTHERS
+
+### Figures of Research Question
+
+##### RQ1: Results across all the benchmarks, and for each specification
+
+- Avg-SR
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_Avg_Boxplot_Budget_1000_Scattered.pdf)
+- Stdv-SR
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_Stdv_Boxplot_Budget_1000_Scattered.pdf)
+
+##### RQ1: Number of generated benchmarks per **RankNumber**
+
+- ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_Legend.pdf)
+- ALL
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_All_Budget_1000.pdf)
+- $\phi_1$
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_S1_Budget_1000.pdf)
+- $\phi_2$
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_S3_Budget_1000.pdf)
+- $\phi_3$
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_S5_Budget_1000.pdf)
+- $\phi_4$
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_CC3_Budget_1000.pdf)
+- $\phi_5$
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ1/RQ1_CC5_Budget_1000.pdf)
+
+##### RQ2: Results for different values of violation ratio $vr \in \\{0, 0.01, 0.05, 0.1\\}$
+
+- Avg-SR
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ2/RQ2_Avg_Boxplot_Budget_1000_Scattered.pdf)
+- Stdv-SR
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ2/RQ2_Stdv_Boxplot_Budget_1000_Scattered.pdf)
+
+##### RQ4: Ranking positions of falsification approaches. 
+Each stacked bar reports, for a given falsification approach (on the x-axis), the percentage of benchmarks (y-axis) in which the approach is in 1st, 2nd, 3rd, or 4th position (starting from the bottom), using different colors. The numbers inside the stacked bar represent the concrete numbers of benchmarks. The number at the top of the stacked bar represents the total number of benchmarks for that specification.
+
+- 1000 simulations
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_1000.pdf)
+- 800 simulations
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_800.pdf)
+- 600 simulations
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_600.pdf)
+- 400 simulations
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_400.pdf)
+- 200 simulations
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ4/RQ4_StackedBar_Budget_200.pdf)
+
+##### RQ5: Distribution of ranking number **RankNumber** of the benchmarks of the ARCH competition
+
+- ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ5/RQ5_Legend.pdf)
+- ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/RQ5/RQ5_Arch_Budget_1000.pdf)
+
+### Others
 
 - Decoding of ranking number RankNumber.
-    - ![image](https://github.com/Fenking/FalBenchGen/blob/main/Utils/RunkNumber.png)
+    - Decoding of RankNumber
+    ![image](https://github.com/Fenking/FalBenchGen/blob/main/figure/others/RunkNumber.png)
