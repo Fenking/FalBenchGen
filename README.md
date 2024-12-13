@@ -38,6 +38,11 @@
 
 ### FAQ
 
+- "z3 version `glibcxx_3.4.26` not found"
+    1. make sure which `glibcxx_3.4.XX` you not have
+    2. use `strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBC` to check there is enough `glibcxx_3.4.XX` to use.(please change the route about `libstdc++.so.6`)
+    3. `rm -rf /matlabroot/sys/os/glnxa64/libstdc++.so.6`
+    4. `ln -s /usr/lib32/libstdc++.so.6 /matlabroot/sys/os/glnxa64/libstdc++.so.6` to exchange out.
 - “`saoptimset` cannot be recognized.”
     1. `nano breach/Core/Algos/@BreachProblem/BreachProblem.m` .
     2. Replace the function `solver_opt = setup_simulannealbnd(this)`
