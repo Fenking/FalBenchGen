@@ -1,7 +1,9 @@
 # FalBenchGen
 
 The code for [Automated Generation of Benchmarks for STL Specifications Falsification](https://ieeexplore.ieee.org/document/10922764).
-Published in [IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=43), 
+
+Published in [IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=43)
+
 DOI: 10.1109/TCAD.2025.3550410, in 2025/03/13.
 
 ## Install
